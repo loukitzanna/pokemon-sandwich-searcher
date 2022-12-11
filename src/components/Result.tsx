@@ -24,8 +24,6 @@ const Results: Component = (props: { columns: any[], values: any[] }) => {
 const ResultsView: Component = () => {
     const [{ db, query }] = useDatabase();
 
-    console.log('wfff ', query.effects, query.types);
-
     const results = createMemo(() => {
         // populate the types of effects
         if (query.effects.length || query.types.length) {
