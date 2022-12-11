@@ -47,22 +47,22 @@ const polyfills = {
       domain: 'rollup-plugin-node-polyfills/polyfills/domain'
     }
   },
-  // optimizeDeps: {
-  //   esbuildOptions: {
-  //     // Node.js global to browser globalThis
-  //     define: {
-  //       global: 'globalThis'
-  //     },
-  //     // Enable esbuild polyfill plugins
-  //     plugins: [
-  //       NodeGlobalsPolyfillPlugin({
-  //         process: true,
-  //         buffer: true
-  //       }),
-  //       NodeModulesPolyfillPlugin()
-  //     ]
-  //   }
-  // },
+  optimizeDeps: {
+    esbuildOptions: {
+      // Node.js global to browser globalThis
+      define: {
+        global: 'globalThis'
+      },
+      // Enable esbuild polyfill plugins
+      plugins: [
+        NodeGlobalsPolyfillPlugin({
+          process: true,
+          buffer: true
+        }),
+        NodeModulesPolyfillPlugin()
+      ]
+    }
+  },
   // build: {
   //   // target: 'esnext',
   //   rollupOptions: {
