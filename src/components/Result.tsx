@@ -2,15 +2,17 @@ import { Component, createMemo } from 'solid-js';
 import { useDatabase } from '../context/DatabaseContext';
 import { getMatchingSandwiches } from '../queries';
 
-const Results = ({ columns, values }) => {
-    console.log(values);
+const Results: Component = (props: { columns: any[], values: any[] }) => {
     return (
         <table class="m-auto table-auto">
             <thead>
-                {columns.map((columnName) => <th>{columnName}</th>)}
+                <tr>
+                    {props.columns.map((columnName) => <th>{columnName}</th>)}
+                </tr>
             </thead>
             <tbody>
-                {values.map((row) => <tr>
+                {props.values.map(([imgUrl, ...row]) => <tr class="odd:bg-white even:bg-slate-50 hover:bg-slate-100">
+                    <td><img src={imgUrl} /></td>
                     {row.map((datum) => <td class="p-4">{datum}</td>)}
                 </tr>)}
             </tbody>
@@ -19,25 +21,23 @@ const Results = ({ columns, values }) => {
 
 }
 
-
 const ResultsView: Component = () => {
     const [{ db, query }] = useDatabase();
 
-    console.log(query.effects);
+    console.log('wfff ', query.effects, query.types);
 
     const results = createMemo(() => {
         // populate the types of effects
-        if (query.effects.length) {
-            const raw = db().exec(getMatchingSandwiches(query.effects));
-            // TODO: may need to do some manipulation here
+        if (query.effects.length || query.types.length) {
+            const raw = db().exec(getMatchingSandwiches(query.effects, query.types));
             return raw;
         } return [];
-    }, [query.effects]);
+    }, [query.effects, query.types]);
 
     return (
         <div class="justify-center pt-16">
             {
-                (query.effects && results().length) ?
+                ((query.effects || query.types) && results().length) ?
                     <Results {...results()[0]} /> :
                     <div>No results to display</div>
             }

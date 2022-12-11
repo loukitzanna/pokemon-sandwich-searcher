@@ -3,7 +3,7 @@ import { createStore } from "solid-js/store";
 import initSqlJs from "sql.js";
 import { DatabaseContextState, DatabaseContextValue } from "./types";
 // @ts-ignore
-import dbFile from '../sandwiches.db';
+import dbFile from '../solid_sandwiches.db';
 
 const DatabaseContext = createContext<DatabaseContextValue>([
     {
@@ -19,8 +19,8 @@ export const DatabaseProvider: ParentComponent = (props) => {
     const [error, setError] = createSignal();
     const [results, setResults] = createSignal();
     const [query, setQuery] = createStore({
-        effects: [],
-        types: [], // for the future
+        effects: "",
+        types: "", // for the future
     });
 
     const [db, { mutate, refetch }] = createResource(async () => {
