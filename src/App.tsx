@@ -10,7 +10,7 @@ const App: Component = () => {
   return (
     <div class={styles.App}>
       <header class={styles.header}>
-        <h1>Pokemon Sandwich Maker</h1>
+        <h1>Pokemon Sandwich Searcher</h1>
         <h3 class="text-lg text-red-300">What kind of sandwich do you feel like?</h3>
       </header>
       <div class="container mx-auto px-4">
